@@ -260,16 +260,17 @@ html, body { height: 100%; overflow: hidden; font-family: var(--font); backgroun
 
 body.mode-phone { }
 body.mode-phone #modeToggleIcon { transform: scaleX(-1); }
-body.mode-phone #header { padding: 8px 12px; gap: 6px; min-height: auto; }
-body.mode-phone .header-left { gap: 6px; }
-body.mode-phone .brand { font-size: 18px; letter-spacing: 1.5px; }
-body.mode-phone .status-badge { font-size: 11px; padding: 2px 10px; }
-body.mode-phone .header-center { flex: none; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; justify-content: flex-start; padding: 0 4px; }
+body.mode-phone #header { padding: 6px 8px; gap: 4px; min-height: auto; }
+body.mode-phone .header-left { gap: 4px; }
+body.mode-phone .brand { font-size: 16px; letter-spacing: 1.5px; }
+body.mode-phone .status-badge { font-size: 10px; padding: 2px 8px; }
+body.mode-phone .header-center { flex: none; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; justify-content: flex-start; padding: 0 2px; }
 body.mode-phone .header-center::-webkit-scrollbar { display: none; }
-body.mode-phone .tab { padding: 6px 14px; font-size: 13px; min-height: auto; white-space: nowrap; flex-shrink: 0; }
-body.mode-phone .header-right { gap: 4px; }
-body.mode-phone .header-btn { padding: 6px 10px; font-size: 12px; min-height: auto; }
-body.mode-phone .header-btn .bi { margin-right: 0; }
+body.mode-phone .tab { padding: 4px 10px; font-size: 12px; min-height: auto; white-space: nowrap; flex-shrink: 0; }
+body.mode-phone .header-right { gap: 3px; }
+body.mode-phone .header-btn { padding: 4px 7px; font-size: 11px; min-height: auto; border-radius: 6px; }
+body.mode-phone .header-btn .bi { font-size: 14px; margin-right: 0; }
+body.mode-phone #modeToggleBtn .bi { font-size: 16px; }
 body.mode-phone .header-btn span { display: none; }
 body.mode-phone #bukaWarungBtn span,
 body.mode-phone #kasKeluarBtn span,
@@ -283,40 +284,59 @@ body.mode-phone #openBillBtn i,
 body.mode-phone #adminBtn i { margin: 0; }
 body.mode-phone #main { flex-direction: column; }
 body.mode-phone .menu-panel { flex: 1; }
-body.mode-phone #menuSearch { padding: 10px 12px; font-size: 14px; }
-body.mode-phone #menuGrid { grid-template-columns: repeat(2,1fr); gap: 8px; padding: 10px; }
-body.mode-phone .menu-item { padding: 14px 10px; }
-body.mode-phone .menu-item .menu-nama { font-size: 14px; margin-bottom: 4px; }
-body.mode-phone .menu-item .menu-harga { font-size: 14px; }
-body.mode-phone #cartPanel { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; max-height: 65dvh; min-width: auto; border-left: none; border-top: 1px solid var(--border); border-radius: var(--radius-xl) var(--radius-xl) 0 0; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 -8px 32px rgba(0,0,0,0.5); }
+body.mode-phone #menuSearch { padding: 8px 10px; font-size: 13px; }
+body.mode-phone #menuGrid { grid-template-columns: repeat(2,1fr); gap: 6px; padding: 8px; }
+body.mode-phone .menu-item { padding: 10px 8px; }
+body.mode-phone .menu-item .menu-nama { font-size: 13px; margin-bottom: 2px; }
+body.mode-phone .menu-item .menu-harga { font-size: 13px; }
+body.mode-phone .menu-item .menu-varian-count { font-size: 10px; margin-top: 2px; }
+body.mode-phone #cartPanel { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; max-height: 60dvh; min-width: auto; border-left: none; border-top: 1px solid var(--border); border-radius: var(--radius-lg) var(--radius-lg) 0 0; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 -8px 32px rgba(0,0,0,0.5); }
 body.mode-phone #cartPanel.cart-open { transform: translateY(0); }
-body.mode-phone #cartPanel::before { content: ''; display: block; width: 36px; height: 4px; border-radius: 2px; background: var(--border); margin: 6px auto 0; flex-shrink: 0; }
-body.mode-phone #cartHeader { padding: 6px 12px; }
-body.mode-phone #customerName { font-size: 14px; padding: 10px 12px; }
-body.mode-phone #cartItems { padding: 4px 12px; }
-body.mode-phone .cart-item { padding: 8px 0; gap: 6px; }
-body.mode-phone .cart-item .ci-nama { font-size: 13px; }
-body.mode-phone .cart-item .ci-harga { font-size: 13px; }
-body.mode-phone .cart-item .ci-qty-btn { width: 28px; height: 28px; font-size: 13px; }
-body.mode-phone .cart-item .ci-qty-val { font-size: 13px; min-width: 18px; }
-body.mode-phone #cartFooter { padding: 10px 12px; }
-body.mode-phone .cart-total { font-size: 18px; margin-bottom: 8px; }
-body.mode-phone .cart-actions { flex-direction: column; gap: 6px; }
-body.mode-phone .cart-actions .btn { padding: 12px 0; font-size: 14px; min-height: auto; }
+body.mode-phone #cartPanel::before { content: ''; display: block; width: 32px; height: 3px; border-radius: 2px; background: var(--border); margin: 4px auto 0; flex-shrink: 0; }
+body.mode-phone #cartHeader { padding: 4px 10px; }
+body.mode-phone #customerName { font-size: 13px; padding: 8px 10px; }
+body.mode-phone #cartItems { padding: 2px 10px; }
+body.mode-phone .cart-item { padding: 6px 0; gap: 4px; }
+body.mode-phone .cart-item .ci-nama { font-size: 12px; }
+body.mode-phone .cart-item .ci-detail { font-size: 10px; }
+body.mode-phone .cart-item .ci-harga { font-size: 12px; }
+body.mode-phone .cart-item .ci-qty-btn { width: 24px; height: 24px; font-size: 11px; }
+body.mode-phone .cart-item .ci-qty-val { font-size: 12px; min-width: 16px; }
+body.mode-phone .cart-item .ci-hapus { font-size: 14px; padding: 4px; }
+body.mode-phone #cartFooter { padding: 8px 10px; }
+body.mode-phone .cart-total { font-size: 16px; margin-bottom: 6px; }
+body.mode-phone .cart-actions { flex-direction: column; gap: 4px; }
+body.mode-phone .cart-actions .btn { padding: 10px 0; font-size: 13px; min-height: auto; }
 body.mode-phone .mobile-cart-btn.hidden-cart { display: none; }
-body.mode-phone .mobile-cart-btn { display: flex; }
-body.mode-phone .modal-content { padding: 16px; }
-body.mode-phone .modal-content h2 { font-size: 17px; margin-bottom: 12px; }
-body.mode-phone .modal-actions .btn { padding: 10px 20px; font-size: 14px; min-height: auto; }
-body.mode-phone .payment-btn { padding: 12px; font-size: 14px; min-height: auto; }
-body.mode-phone .pay-total { font-size: 22px; }
-body.mode-phone #cashInput { padding: 14px; font-size: 20px; }
-body.mode-phone .qc-btn { padding: 8px 14px; font-size: 13px; min-width: 52px; min-height: auto; }
-body.mode-phone .discount-row { padding: 6px 10px; gap: 4px; }
-body.mode-phone .discount-row input { width: 52px; padding: 6px; font-size: 13px; }
-body.mode-phone .discount-row .discount-total { font-size: 12px; }
-body.mode-phone .tax-row { font-size: 13px; padding: 4px 12px; }
-body.mode-phone .kembalian { font-size: 17px; }
-body.mode-phone .opsi-radio label, body.mode-phone .opsi-checkbox label { padding: 10px 14px; font-size: 14px; min-height: auto; }
+body.mode-phone .mobile-cart-btn { display: flex; width: 52px; height: 52px; font-size: 20px; bottom: 16px; right: 16px; }
+body.mode-phone .cart-badge { font-size: 10px; min-width: 18px; height: 18px; line-height: 18px; top: -2px; right: -2px; }
+body.mode-phone .modal-content { padding: 12px; }
+body.mode-phone .modal-content h2 { font-size: 15px; margin-bottom: 8px; }
+body.mode-phone .modal-actions { margin-top: 12px; gap: 6px; }
+body.mode-phone .modal-actions .btn { padding: 8px 14px; font-size: 13px; min-height: auto; }
+body.mode-phone .payment-btn { padding: 10px; font-size: 13px; min-height: auto; }
+body.mode-phone .pay-total { font-size: 18px; margin-bottom: 10px; }
+body.mode-phone #cashInput { padding: 10px; font-size: 17px; }
+body.mode-phone .qc-btn { padding: 6px 10px; font-size: 12px; min-width: 44px; min-height: auto; }
+body.mode-phone .quick-cash { gap: 6px; margin: 8px 0; }
+body.mode-phone .discount-row { padding: 4px 8px; gap: 4px; margin-bottom: 8px; }
+body.mode-phone .discount-row label { font-size: 12px; }
+body.mode-phone .discount-row input { width: 44px; padding: 4px 6px; font-size: 12px; }
+body.mode-phone .discount-row .discount-total { font-size: 11px; }
+body.mode-phone .tax-row { font-size: 12px; padding: 2px 8px; margin-bottom: 8px; }
+body.mode-phone .kembalian { font-size: 15px; margin-top: 8px; }
+body.mode-phone .opsi-radio, body.mode-phone .opsi-checkbox { gap: 6px; }
+body.mode-phone .opsi-radio label, body.mode-phone .opsi-checkbox label { padding: 8px 10px; font-size: 13px; min-height: auto; gap: 8px; }
+body.mode-phone .opsi-radio input, body.mode-phone .opsi-checkbox input { width: 18px; height: 18px; }
+body.mode-phone #menuModalBody input[type="text"],
+body.mode-phone #menuModalBody input[type="number"] { padding: 10px 12px; font-size: 15px; }
+body.mode-phone #menuModalBody .opsi-group { margin-bottom: 14px; }
+body.mode-phone #menuModalBody .opsi-group > label { font-size: 12px; margin-bottom: 6px; }
+body.mode-phone .mode-selector-content { padding: 24px; }
+body.mode-phone .mode-selector-content h2 { font-size: 18px; }
+body.mode-phone .mode-desc { font-size: 13px; margin-bottom: 18px; }
+body.mode-phone .mode-options { gap: 10px; }
+body.mode-phone .mode-btn { padding: 20px 12px; font-size: 14px; gap: 8px; }
+body.mode-phone .mode-btn i { font-size: 28px; }
 body.mode-phone #adminModal { max-width: 100%; }
 body.mode-phone .admin-content { width: 100%; border-radius: var(--radius-lg); }

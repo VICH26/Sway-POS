@@ -23,7 +23,7 @@ function setMode(mode) {
   document.body.classList.toggle('mode-phone', mode === 'phone')
   document.body.classList.toggle('mode-tablet', mode === 'tablet')
   const icon = document.getElementById('modeToggleIcon')
-  if (icon) icon.className = mode === 'phone' ? 'bi bi-tablet-landscape-fill' : 'bi bi-phone-fill'
+  if (icon) icon.className = mode === 'phone' ? 'bi bi-phone-fill' : 'bi bi-tablet-landscape-fill'
   localStorage.setItem('sway_mode', mode)
 }
 
@@ -48,8 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   })
   document.getElementById('modeToggleBtn').onclick = () => {
-    const next = document.body.classList.contains('mode-phone') ? 'tablet' : 'phone'
-    setMode(next)
+    document.getElementById('modeSelector').classList.remove('hidden')
   }
 
   if (savedMode) initApp()
