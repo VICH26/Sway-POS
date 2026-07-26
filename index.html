@@ -25,13 +25,13 @@
       <button class="tab" data-kategori="Snack">Snack</button>
     </div>
     <div class="header-right">
-      <button class="header-btn" id="modeToggleBtn" title="Ganti mode"><i class="bi bi-phone" id="modeToggleIcon"></i></button>
+      <button class="header-btn" id="modeToggleBtn" title="Ganti mode" aria-label="Ganti mode tampilan"><i class="bi bi-phone" id="modeToggleIcon"></i></button>
       <button class="header-btn" id="bukaWarungBtn"><i class="bi bi-unlock-fill"></i> Buka Warung</button>
       <button class="header-btn hidden" id="kasKeluarBtn"><i class="bi bi-wallet2"></i> Kas Keluar</button>
       <button class="header-btn hidden" id="tutupWarungBtn"><i class="bi bi-lock-fill"></i> Tutup Warung</button>
       <button class="header-btn" id="openBillBtn"><i class="bi bi-clipboard-data"></i> Open Bill</button>
       <button class="header-btn" id="adminBtn"><i class="bi bi-shield-lock-fill"></i> Admin</button>
-      <button class="header-btn" id="fsBtn"><i class="bi bi-arrows-fullscreen"></i></button>
+      <button class="header-btn" id="fsBtn" aria-label="Fullscreen"><i class="bi bi-arrows-fullscreen"></i></button>
     </div>
   </header>
 
@@ -110,6 +110,9 @@
           <input type="number" id="discountInput" value="0" min="0" max="100">
           <span>%</span>
           <span class="discount-total">Potongan: <strong id="discountAmount">Rp 0</strong></span>
+        </div>
+        <div class="tax-row hidden" id="taxRow">
+          PPN <span id="taxPercent">0</span>%: <strong id="taxAmount">Rp 0</strong>
         </div>
         <div id="cashInputArea">
           <label>Uang Dibayar</label>

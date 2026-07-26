@@ -7,19 +7,30 @@ function recalcTotal() {
   const diskon = Math.min(parseInt(document.getElementById('discountInput').value) || 0, 100)
   currentPaymentDiskon = diskon
   const potongan = Math.round(currentPaymentSubtotal * diskon / 100)
-  currentPaymentTotal = currentPaymentSubtotal - potongan
+  const afterDiskon = currentPaymentSubtotal - potongan
+  const pajakPersen = (getSettings().pajak_persen || 0)
+  const ppn = Math.round(afterDiskon * pajakPersen / 100)
+  currentPaymentTotal = afterDiskon + ppn
   document.getElementById('discountAmount').textContent = formatRp(potongan)
+  document.getElementById('taxPercent').textContent = pajakPersen
+  document.getElementById('taxAmount').textContent = formatRp(ppn)
+  document.getElementById('taxRow').classList.toggle('hidden', pajakPersen === 0)
   document.getElementById('payAmount').textContent = formatRp(currentPaymentTotal)
   document.getElementById('cashInput').dispatchEvent(new Event('input'))
 }
 
 function showPayment() {
   currentPaymentSubtotal = cart.reduce((s, i) => s + i.subtotal, 0)
-  currentPaymentTotal = currentPaymentSubtotal
+  const pajakPersen = (getSettings().pajak_persen || 0)
+  const ppn = Math.round(currentPaymentSubtotal * pajakPersen / 100)
+  currentPaymentTotal = currentPaymentSubtotal + ppn
   currentPaymentDiskon = 0
   document.getElementById('payAmount').textContent = formatRp(currentPaymentTotal)
   document.getElementById('discountInput').value = 0
   document.getElementById('discountAmount').textContent = 'Rp 0'
+  document.getElementById('taxPercent').textContent = pajakPersen
+  document.getElementById('taxAmount').textContent = formatRp(ppn)
+  document.getElementById('taxRow').classList.toggle('hidden', pajakPersen === 0)
   document.getElementById('cashInput').value = ''
   document.getElementById('kembalianValue').textContent = 'Rp 0'
   document.getElementById('cashInputArea').classList.remove('hidden')
