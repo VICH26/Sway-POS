@@ -1,0 +1,31 @@
+{
+  "menus": [
+
+    {"id": 18, "nama": "Good Day", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Dingin"], "variants": [{"nama": "Freeze", "stok": 50}, {"nama": "Cappuccino", "stok": 50}, {"nama": "Mocafrio", "stok": 50}, {"nama": "Hazelnut", "stok": 50}]},
+    {"id": 19, "nama": "Kopi ABC", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Hangat", "Dingin"], "variants": [{"nama": "Klepon", "stok": 50}, {"nama": "Susu", "stok": 50}]},
+    {"id": 20, "nama": "Nescafe Classic", "kategori": "Minuman", "harga_dasar": 3000, "tersedia": ["Hangat", "Dingin"], "variants": []},
+    {"id": 21, "nama": "Nescafe", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Hangat", "Dingin"], "variants": [{"nama": "3in1 Original", "stok": 50}, {"nama": "Mocha", "stok": 50}, {"nama": "Latte", "stok": 50}, {"nama": "Ice Black", "stok": 50}]},
+    {"id": 22, "nama": "Nutrisari", "kategori": "Minuman", "harga_dasar": 4000, "tersedia": ["Dingin"], "variants": [{"nama": "Sweet Orange", "stok": 30}, {"nama": "Jeruk Peras", "stok": 30}, {"nama": "Florida Orange", "stok": 30}, {"nama": "Mangga", "stok": 30}, {"nama": "Jambu", "stok": 30}, {"nama": "Anggur", "stok": 30}, {"nama": "Leci", "stok": 30}]},
+    {"id": 23, "nama": "Indocafe Coffeemix", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Hangat"], "variants": []},
+    {"id": 24, "nama": "Beng-Beng Drink", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Dingin"], "variants": []},
+    {"id": 25, "nama": "Ovaltine", "kategori": "Minuman", "harga_dasar": 6000, "tersedia": ["Hangat", "Dingin"], "variants": []},
+    {"id": 26, "nama": "Milo", "kategori": "Minuman", "harga_dasar": 6000, "tersedia": ["Hangat", "Dingin"], "variants": []},
+    {"id": 27, "nama": "Max Tea Teh Tarik", "kategori": "Minuman", "harga_dasar": 4000, "tersedia": ["Hangat", "Dingin"], "variants": []},
+    {"id": 28, "nama": "Kopi Liong", "kategori": "Minuman", "harga_dasar": 4000, "tersedia": ["Hangat"], "variants": []},
+    {"id": 29, "nama": "Fanta", "kategori": "Minuman", "harga_dasar": 6000, "tersedia": ["Dingin"], "variants": [{"nama": "Strawberry", "stok": 30}, {"nama": "Orange", "stok": 30}]},
+    {"id": 30, "nama": "Soda", "kategori": "Minuman", "harga_dasar": 6000, "tersedia": ["Dingin"], "variants": [{"nama": "Coca-Cola", "stok": 30}, {"nama": "Sprite", "stok": 30}]},
+    {"id": 31, "nama": "Air Soda", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Dingin"], "variants": [{"nama": "Soda Water", "stok": 20}]},
+    {"id": 32, "nama": "Chocolatos", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Hangat", "Dingin"], "variants": [{"nama": "Drink Cokelat", "stok": 30}, {"nama": "Drink Matcha", "stok": 30}, {"nama": "Drink Kopi", "stok": 30}]},
+    {"id": 33, "nama": "Tea Jus", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Dingin"], "variants": [{"nama": "Gula Batu", "stok": 30}, {"nama": "Apel", "stok": 30}, {"nama": "Lemon", "stok": 30}, {"nama": "Melati", "stok": 30}]},
+    {"id": 34, "nama": "Energen", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Hangat", "Dingin"], "variants": [{"nama": "Cokelat", "stok": 30}, {"nama": "Vanilla", "stok": 30}, {"nama": "Kacang Hijau", "stok": 30}, {"nama": "Jahe", "stok": 30}, {"nama": "Kurma", "stok": 30}]},
+    {"id": 35, "nama": "Air Mineral Botolan Teds", "kategori": "Minuman", "harga_dasar": 3000, "tersedia": ["Dingin"], "variants": []}
+  ],
+  "add_ons": [
+    {"id": 1, "nama_addon": "Tambah Telur", "harga_tambahan": 2000},
+    {"id": 2, "nama_addon": "Tambah Susu", "harga_tambahan": 2000},
+    {"id": 3, "nama_addon": "Ekstra Manis", "harga_tambahan": 500},
+    {"id": 4, "nama_addon": "Kurang Manis", "harga_tambahan": 0},
+    {"id": 5, "nama_addon": "Tambah Keju", "harga_tambahan": 2000},
+    {"id": 6, "nama_addon": "Tambah Pedas", "harga_tambahan": 0}
+  ]
+}

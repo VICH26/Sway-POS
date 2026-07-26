@@ -1,0 +1,4 @@
+dist/
+*.apk
+node_modules/
+graphify-out/

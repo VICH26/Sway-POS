@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0d0d1a">
+<link rel="manifest" href="manifest.json">
+<title>SWAY POS - Warkop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+<div id="app">
+  <header id="header">
+    <div class="header-left">
+      <h1 class="brand">SWAY</h1>
+      <span class="status-badge open" id="statusBadge">BUKA</span>
+    </div>
+    <div class="header-center" id="categoryTabs">
+      <button class="tab active" data-kategori="Minuman">Minuman</button>
+      <button class="tab" data-kategori="Makanan">Makanan</button>
+      <button class="tab" data-kategori="Snack">Snack</button>
+    </div>
+    <div class="header-right">
+      <button class="header-btn" id="modeToggleBtn" title="Ganti mode"><i class="bi bi-phone" id="modeToggleIcon"></i></button>
+      <button class="header-btn" id="bukaWarungBtn"><i class="bi bi-unlock-fill"></i> Buka Warung</button>
+      <button class="header-btn hidden" id="kasKeluarBtn"><i class="bi bi-wallet2"></i> Kas Keluar</button>
+      <button class="header-btn hidden" id="tutupWarungBtn"><i class="bi bi-lock-fill"></i> Tutup Warung</button>
+      <button class="header-btn" id="openBillBtn"><i class="bi bi-clipboard-data"></i> Open Bill</button>
+      <button class="header-btn" id="adminBtn"><i class="bi bi-shield-lock-fill"></i> Admin</button>
+      <button class="header-btn" id="fsBtn"><i class="bi bi-arrows-fullscreen"></i></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="menu-panel">
+      <input type="text" id="menuSearch" placeholder="Cari menu..." autocomplete="off">
+      <section id="menuGrid"></section>
+    </div>
+    <aside id="cartPanel">
+      <div id="cartHeader">
+        <input type="text" id="customerName" placeholder="Nama Pelanggan (opsional)">
+      </div>
+      <div id="cartItems"></div>
+      <div id="cartFooter">
+        <div class="cart-total">
+          <span>Total</span>
+          <span id="cartTotal">Rp 0</span>
+        </div>
+        <div class="cart-actions">
+          <button class="btn btn-consumption" id="employeeMealBtn">MAKAN KARYAWAN</button>
+          <button class="btn btn-warning" id="saveBillBtn">SIMPAN (OPEN BILL)</button>
+          <button class="btn btn-success" id="payBtn">BAYAR SEKARANG</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<div id="modeSelector" class="mode-selector hidden">
+  <div class="mode-selector-content">
+    <h2>Pilih Mode Tampilan</h2>
+    <p class="mode-desc">Sesuaikan tata letak dengan perangkat Anda</p>
+    <div class="mode-options">
+      <button class="mode-btn" data-mode="tablet">
+        <i class="bi bi-tablet-landscape-fill"></i>
+        <span>Tablet<br><small>Landscape</small></span>
+      </button>
+      <button class="mode-btn" data-mode="phone">
+        <i class="bi bi-phone-fill"></i>
+        <span>HP<br><small>Portrait</small></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="mobileCartBtn" class="mobile-cart-btn">
+  <i class="bi bi-cart-fill"></i>
+  <span class="cart-badge" id="cartBadge">0</span>
+</div>
+
+<div id="modalOverlay" class="hidden"></div>
+
+<div id="menuModal" class="modal hidden">
+  <div class="modal-content">
+    <h2 id="menuModalTitle">Menu</h2>
+    <div id="menuModalBody"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="menuModalCancel">Batal</button>
+      <button class="btn btn-primary" id="menuModalAdd">Tambah ke Keranjang</button>
+    </div>
+  </div>
+</div>
+
+<div id="paymentModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Pembayaran</h2>
+    <div id="paymentBody">
+      <div class="payment-methods">
+        <button class="payment-btn active" data-metode="cash"><i class="bi bi-cash-coin"></i> Tunai</button>
+        <button class="payment-btn" data-metode="qris"><i class="bi bi-phone"></i> QRIS</button>
+      </div>
+      <div id="paymentDetail">
+        <div class="pay-total">Total: <span id="payAmount">Rp 0</span></div>
+        <div class="discount-row">
+          <label>Diskon</label>
+          <input type="number" id="discountInput" value="0" min="0" max="100">
+          <span>%</span>
+          <span class="discount-total">Potongan: <strong id="discountAmount">Rp 0</strong></span>
+        </div>
+        <div id="cashInputArea">
+          <label>Uang Dibayar</label>
+          <input type="text" id="cashInput" class="price-input" placeholder="0" inputmode="numeric">
+          <div class="quick-cash">
+            <button class="qc-btn" data-nominal="5000">5K</button>
+            <button class="qc-btn" data-nominal="10000">10K</button>
+            <button class="qc-btn" data-nominal="20000">20K</button>
+            <button class="qc-btn" data-nominal="50000">50K</button>
+            <button class="qc-btn" data-nominal="100000">100K</button>
+          </div>
+          <div class="kembalian">Kembalian: <span id="kembalianValue">Rp 0</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="paymentCancel">Batal</button>
+      <button class="btn btn-success" id="paymentConfirm">SUDAH BAYAR</button>
+    </div>
+  </div>
+</div>
+
+<div id="adminModal" class="modal hidden">
+  <div class="modal-content admin-content">
+    <div id="pinScreen">
+      <h2>Masukkan PIN Admin</h2>
+      <input type="password" id="pinInput" maxlength="4" placeholder="****">
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary" id="pinBatal">Batal</button>
+        <button class="btn btn-primary" id="pinSubmit">Masuk</button>
+      </div>
+      <p class="pin-error hidden" id="pinError">PIN salah!</p>
+    </div>
+    <div id="adminPanel" class="hidden">
+      <div class="admin-header">
+        <h2>Panel Admin</h2>
+        <button class="btn btn-secondary" id="adminClose">Tutup</button>
+      </div>
+      <div class="admin-stats" id="adminStats"></div>
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="menus">Menu</button>
+        <button class="admin-tab" data-tab="addons">Add-on</button>
+        <button class="admin-tab" data-tab="laporan">Laporan</button>
+        <button class="admin-tab" data-tab="dashboard"><i class="bi bi-bar-chart-fill"></i></button>
+        <button class="admin-tab" data-tab="settings"><i class="bi bi-gear-fill"></i></button>
+      </div>
+      <div id="adminMenus" class="admin-section"></div>
+      <div id="adminAddons" class="admin-section hidden"></div>
+      <div id="adminLaporan" class="admin-section hidden"></div>
+      <div id="adminDashboard" class="admin-section hidden"></div>
+      <div id="adminSettings" class="admin-section hidden"></div>
+    </div>
+  </div>
+</div>
+
+<div id="openBillModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Daftar Open Bill</h2>
+    <div id="openBillList"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="openBillClose">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<div id="bukaWarungModal" class="modal hidden">
+  <div class="modal-content">
+    <h2><i class="bi bi-unlock-fill"></i> Buka Warung</h2>
+    <div class="form-group">
+      <label>Modal Awal / Uang Receh</label>
+      <input type="text" id="modalAwalInput" class="form-input price-input" value="100.000" inputmode="numeric">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="bukaWarungBatal">Batal</button>
+      <button class="btn btn-success" id="bukaWarungKonfirm"><i class="bi bi-check-circle-fill"></i> Buka Warung</button>
+    </div>
+  </div>
+</div>
+
+<div id="kasKeluarModal" class="modal hidden">
+  <div class="modal-content">
+    <h2><i class="bi bi-wallet2"></i> Kas Keluar</h2>
+    <div class="form-group">
+      <label>Nominal</label>
+      <input type="text" id="kasKeluarNominal" class="form-input price-input" placeholder="0" inputmode="numeric">
+    </div>
+    <div class="form-group">
+      <label>Alasan</label>
+      <input type="text" id="kasKeluarAlasan" class="form-input" placeholder="Misal: beli gula, bensin...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="kasKeluarBatal">Batal</button>
+      <button class="btn btn-danger" id="kasKeluarKonfirm"><i class="bi bi-wallet2"></i> Simpan</button>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer"></div>
+
+<div id="rekapModal" class="modal hidden">
+  <div class="modal-content">
+    <h2><i class="bi bi-lock-fill"></i> Tutup Warung — Rekap Shift</h2>
+    <div id="rekapBody"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="rekapBatal">Batal</button>
+      <button class="btn btn-success" id="rekapKonfirm"><i class="bi bi-check-circle-fill"></i> Konfirmasi Tutup</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/db.js"></script>
+<script src="js/menus.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/payment.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/shift.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
