@@ -85,6 +85,7 @@
         <span>HP<br><small>Portrait</small></span>
       </button>
     </div>
+    <p class="mode-skip" id="modeSkip">Lewati — pakai mode sebelumnya</p>
   </div>
 </div>
 
@@ -234,13 +235,7 @@
   </div>
 </div>
 
-<script>
-try {
-  if (localStorage.getItem('sway_mode')) {
-    document.getElementById('modeSelector').classList.add('hidden')
-  }
-} catch(e) {}
-</script>
+
 <script src="js/db.js"></script>
 <script src="js/menus.js"></script>
 <script src="js/cart.js"></script>

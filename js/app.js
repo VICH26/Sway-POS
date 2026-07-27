@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (savedMode) {
     setMode(savedMode)
     if (!appStarted) { appStarted = true; initApp() }
-    document.getElementById('modeSelector').classList.add('hidden')
   }
 
   document.querySelectorAll('.mode-btn').forEach(btn => {
@@ -74,6 +73,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!appStarted) { appStarted = true; initApp() }
     }
   })
+  document.getElementById('modeSelector').onclick = function(e) {
+    if (e.target === this) this.classList.add('hidden')
+  }
+  document.getElementById('modeSkip').onclick = function() {
+    if (savedMode) {
+      document.getElementById('modeSelector').classList.add('hidden')
+    }
+  }
   document.getElementById('themeToggleBtn').onclick = toggleTheme
   document.getElementById('modeToggleBtn').onclick = () => {
     document.getElementById('modeSelector').classList.remove('hidden')
