@@ -1,3 +1,5 @@
+try { JSON.parse(localStorage.getItem('sway_settings') || '{}') } catch(e) { localStorage.removeItem('sway_settings') }
+try { JSON.parse(localStorage.getItem('sway_cart') || '{}') } catch(e) { localStorage.removeItem('sway_cart') }
 window.parsePrice = s => parseInt(String(s).replace(/\./g, '')) || 0
 
 document.addEventListener('input', e => {
@@ -7,6 +9,27 @@ document.addEventListener('input', e => {
   const f = r.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   if (f !== e.target.value) { e.target.value = f; e.target.setSelectionRange(s + (f.length - e.target.value.length), s + (f.length - e.target.value.length)) }
 })
+
+function initTheme() {
+  const saved = localStorage.getItem('sway_theme')
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  if (saved === 'light' || (!saved && !prefersDark))
+    document.documentElement.classList.add('theme-light')
+  updateThemeIcon()
+}
+
+function toggleTheme() {
+  document.documentElement.classList.toggle('theme-light')
+  localStorage.setItem('sway_theme', document.documentElement.classList.contains('theme-light') ? 'light' : 'dark')
+  updateThemeIcon()
+}
+
+function updateThemeIcon() {
+  const btn = document.getElementById('themeToggleBtn')
+  if (!btn) return
+  const isLight = document.documentElement.classList.contains('theme-light')
+  btn.innerHTML = isLight ? '<i class="bi bi-sun-fill"></i> Tema Terang' : '<i class="bi bi-moon-fill"></i> Tema Gelap'
+}
 
 window.showToast = function(msg, type) {
   const c = document.getElementById('toastContainer')
@@ -27,34 +50,65 @@ function setMode(mode) {
   localStorage.setItem('sway_mode', mode)
 }
 
+let appStarted = false
+
 document.addEventListener('DOMContentLoaded', async () => {
+  initTheme()
   document.getElementById('modalOverlay').onclick = () => {
     document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden'))
     document.getElementById('modalOverlay').classList.add('hidden')
   }
 
-  const savedMode = localStorage.getItem('sway_mode')
-  if (savedMode) {
-    setMode(savedMode)
-  } else {
-    document.getElementById('modeSelector').classList.remove('hidden')
-  }
+  document.getElementById('modeSelector').classList.remove('hidden')
 
   document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.onclick = () => {
       setMode(btn.dataset.mode)
       document.getElementById('modeSelector').classList.add('hidden')
-      initApp()
+      if (!appStarted) { appStarted = true; initApp() }
     }
   })
+  document.getElementById('themeToggleBtn').onclick = toggleTheme
   document.getElementById('modeToggleBtn').onclick = () => {
     document.getElementById('modeSelector').classList.remove('hidden')
   }
 
-  if (savedMode) initApp()
+  var moreBtn = document.getElementById('moreBtn')
+  if (moreBtn) {
+    moreBtn.onclick = function(e) {
+      var menu = document.getElementById('moreMenu')
+      if (!menu) return
+      var rect = this.getBoundingClientRect()
+      menu.style.top = (rect.bottom + 4) + 'px'
+      menu.style.left = Math.max(4, rect.right - 180) + 'px'
+      menu.classList.toggle('open')
+      e.stopPropagation()
+    }
+  }
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('moreMenu')
+    var btn = document.getElementById('moreBtn')
+    if (menu && (!btn || !btn.contains(e.target))) {
+      menu.classList.remove('open')
+    }
+  })
+})
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden'))
+    document.getElementById('modalOverlay').classList.add('hidden')
+  }
+  if (e.key === 'Enter') {
+    const pm = document.getElementById('paymentModal')
+    if (!pm.classList.contains('hidden')) { document.getElementById('paymentConfirm').click(); return }
+    const am = document.getElementById('adminModal')
+    if (!am.classList.contains('hidden') && !document.getElementById('pinScreen').classList.contains('hidden')) { document.getElementById('pinSubmit').click() }
+  }
 })
 
 async function initApp() {
+  document.getElementById('menuGrid').innerHTML = '<div class="loading-sk"><div></div><div></div><div></div><div></div><div></div><div></div></div>'
   await seed()
   await loadCart()
   updateShiftUI()
@@ -71,8 +125,6 @@ async function initApp() {
   })
 
   document.getElementById('openBillBtn').onclick = showOpenBills
-  document.getElementById('fsBtn').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen()
-  document.addEventListener('fullscreenchange', () => { document.getElementById('fsBtn').innerHTML = document.fullscreenElement ? '<i class="bi bi-x"></i>' : '<i class="bi bi-arrows-fullscreen"></i>' })
   document.getElementById('openBillClose').onclick = () => {
     document.getElementById('openBillModal').classList.add('hidden')
     document.getElementById('modalOverlay').classList.add('hidden')
@@ -114,8 +166,9 @@ async function showOpenBills() {
         cart = items.map(i => {
           const menu = menus.find(m => m.nama === i.nama_menu) || { nama: i.nama_menu, harga_dasar: i.subtotal, variants: [] }
           const qty = i.qty || 1
-          return { menu, varian: i.varian_dipilih, suhu: i.suhu, addons: JSON.parse(i.addon_snapshot || '[]'), catatan: i.catatan, subtotal: i.subtotal, detail: '', qty, harga_satuan: Math.round(i.subtotal / qty) }
-        })
+          let addonSnapshot = []; try { addonSnapshot = JSON.parse(i.addon_snapshot || '[]') } catch {}
+          return { menu, varian: i.varian_dipilih, suhu: i.suhu, addons: addonSnapshot, catatan: i.catatan, subtotal: i.subtotal, detail: '', qty, harga_satuan: Math.round(i.subtotal / qty) }
+})
         renderCart()
         showPayment()
       }

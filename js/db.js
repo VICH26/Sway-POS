@@ -63,11 +63,13 @@ async function del(store, id) {
 
 async function seed() {
   if (localStorage.getItem('seeded')) return
-  const res = await fetch('data/seed.json')
-  const data = await res.json()
-  for (const item of data.menus) await put('menus', item)
-  for (const item of data.add_ons) await put('add_ons', item)
-  localStorage.setItem('seeded', '1')
+  try {
+    const res = await fetch('data/seed.json?t=' + Date.now())
+    const data = await res.json()
+    for (const item of data.menus) await put('menus', item)
+    for (const item of data.add_ons) await put('add_ons', item)
+    localStorage.setItem('seeded', '1')
+  } catch (e) { console.warn('seed failed', e) }
 }
 
 async function getNextId(store) {

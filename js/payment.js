@@ -86,11 +86,13 @@ document.getElementById('paymentConfirm').onclick = async () => {
 
   const nama = document.getElementById('customerName').value.trim() || 'Tanpa Nama'
   const id = await getNextId('orders')
+  const pajakPersen = (getSettings().pajak_persen || 0)
   const order = {
     id, nama_pelanggan: nama, status: 'paid',
     metode_bayar: currentPaymentMetode,
     total: currentPaymentTotal,
     diskon_persen: currentPaymentDiskon || 0,
+    pajak_persen: pajakPersen,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
   }
@@ -118,10 +120,22 @@ document.getElementById('paymentConfirm').onclick = async () => {
     }
   }
 
+  const kembalian = currentPaymentMetode === 'cash' ? Math.max(0, parsePrice(document.getElementById('cashInput').value) - currentPaymentTotal) : 0
+  const s = getShift()
+  if (kembalian > 0 && s && s.status === 'open') {
+    await put('cash_ledger', {
+      id: await getNextId('cash_ledger'), shift_id: s.shift_id,
+      tipe: 'kembalian', nominal: kembalian,
+      deskripsi: 'Kembalian - ' + (document.getElementById('customerName').value.trim() || 'Tn.'),
+      created_at: new Date().toISOString()
+    })
+  }
   cart = []
   document.getElementById('customerName').value = ''
   renderCart()
   renderMenuGrid(currentKategori)
   document.getElementById('paymentModal').classList.add('hidden')
   document.getElementById('modalOverlay').classList.add('hidden')
+  const msg = 'Pembayaran ' + formatRp(currentPaymentTotal) + ' berhasil' + (kembalian > 0 ? ' (Kembalian: ' + formatRp(kembalian) + ')' : '')
+  showToast(msg, 'success')
 }

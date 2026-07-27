@@ -1,4 +1,4 @@
-const CACHE = 'sway-pos-v1'
+const CACHE = 'sway-pos-v2'
 const URLS = ['/', 'index.html', 'css/style.css', 'js/db.js', 'js/menus.js', 'js/cart.js', 'js/payment.js', 'js/shift.js', 'js/admin.js', 'js/app.js', 'manifest.json', 'data/seed.json', 'icons/icon-192.png', 'icons/icon-512.png']
 
 self.addEventListener('install', e => {

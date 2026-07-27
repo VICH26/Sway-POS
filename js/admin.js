@@ -1,5 +1,5 @@
 function getSettings() {
-  return JSON.parse(localStorage.getItem('sway_settings') || '{}')
+  try { return JSON.parse(localStorage.getItem('sway_settings') || '{}') } catch { return {} }
 }
 
 function saveSettings(settings) {
@@ -78,22 +78,26 @@ async function loadAdminPanel() {
 async function renderAdminMenus() {
   const menus = await getAll('menus')
   let html = '<button class="btn btn-primary btn-add-custom" id="addMenuBtn">+ Tambah Menu</button>'
-  html += '<table class="admin-table"><tr><th>Menu</th><th>Kategori</th><th>Harga</th><th>Varian (Stok)</th><th>Aksi</th></tr>'
+  html += '<div class="admin-menu-list">'
   menus.filter(m => m.is_active !== false).forEach(m => {
     const minStok = m.variants ? Math.min(...m.variants.map(v => v.stok || 0)) : 0
-    const rowClass = minStok === 0 ? 'tr-stok-habis' : minStok <= 5 ? 'tr-stok-menipis' : ''
+    const cls = minStok === 0 ? 'stok-habis' : minStok <= 5 ? 'stok-menipis' : ''
     const varianStr = m.variants && m.variants.length
-      ? m.variants.map(v => `${v.nama} (${v.stok})`).join(', ')
-      : '-'
-    html += `<tr class="${rowClass}">
-      <td>${m.nama}</td>
-      <td>${m.kategori}</td>
-      <td>${formatRp(m.harga_dasar)}</td>
-      <td style="font-size:11px">${varianStr}</td>
-      <td style="white-space:nowrap"><button class="btn-sm btn-edit" data-id="${m.id}">Edit</button> <button class="btn-sm btn-del" data-id="${m.id}">Hapus</button></td>
-    </tr>`
+      ? m.variants.map(v => `<span class="amc-varian">${v.nama} <em>${v.stok}</em></span>`).join('')
+      : '<span class="amc-varian" style="color:var(--text-muted)">—</span>'
+    html += `<div class="admin-menu-card ${cls}">
+      <div class="amc-body">
+        <div class="amc-nama">${m.nama}</div>
+        <div class="amc-meta"><span class="amc-kategori">${m.kategori}</span> ${formatRp(m.harga_dasar)}</div>
+        <div class="amc-varians">${varianStr}</div>
+      </div>
+      <div class="amc-actions">
+        <button class="btn-sm btn-edit" data-id="${m.id}">Edit</button>
+        <button class="btn-sm btn-del" data-id="${m.id}">Hapus</button>
+      </div>
+    </div>`
   })
-  html += '</table>'
+  html += '</div>'
   document.getElementById('adminMenus').innerHTML = html
 
   document.getElementById('addMenuBtn').onclick = () => showMenuForm()
@@ -332,10 +336,12 @@ async function renderLaporanTabel() {
     document.getElementById('laporanTabel').innerHTML = '<div class="empty-state">Tidak ada transaksi</div>'
     return
   }
-  let html = '<table class="admin-table"><tr><th>#</th><th>Waktu</th><th>Pelanggan</th><th>Metode</th><th>Total</th></tr>'
+  let html = '<table class="admin-table"><tr><th>#</th><th>Waktu</th><th>Pelanggan</th><th>Metode</th><th>PPN</th><th>Total</th></tr>'
   orders.forEach((o, i) => {
     const waktu = new Date(o.created_at).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' })
-    html += `<tr><td>${i+1}</td><td style="font-size:12px">${waktu}</td><td>${o.nama_pelanggan}</td><td>${o.metode_bayar === 'cash' ? 'Tunai' : 'QRIS'}</td><td style="color:var(--accent);font-weight:700">${formatRp(o.total)}</td></tr>`
+    const pajakPersen = o.pajak_persen || 0
+    const ppn = pajakPersen ? Math.round(o.total * pajakPersen / (100 + pajakPersen)) : 0
+    html += `<tr><td>${i+1}</td><td style="font-size:12px">${waktu}</td><td>${o.nama_pelanggan}</td><td>${o.metode_bayar === 'cash' ? 'Tunai' : 'QRIS'}</td><td style="font-size:12px">${pajakPersen ? formatRp(ppn) + ' (' + pajakPersen + '%)' : '-'}</td><td style="color:var(--accent);font-weight:700">${formatRp(o.total)}</td></tr>`
   })
   html += '</table>'
   document.getElementById('laporanTabel').innerHTML = html
@@ -347,11 +353,11 @@ async function renderLaporanShift() {
     document.getElementById('laporanShiftTabel').innerHTML = '<div class="empty-state">Belum ada rekap shift</div>'
     return
   }
-  let html = '<table class="admin-table"><tr><th>#</th><th>Tanggal</th><th>Modal</th><th>Tunai</th><th>QRIS</th><th>Kas Keluar</th><th>Konsumsi</th><th>Estimasi Fisik</th></tr>'
+  let html = '<table class="admin-table"><tr><th>#</th><th>Tanggal</th><th>Modal</th><th>Tunai</th><th>QRIS</th><th>Kembalian</th><th>Kas Keluar</th><th>Konsumsi</th><th>Estimasi Fisik</th></tr>'
   ledger.forEach((l, i) => {
-    const r = JSON.parse(l.deskripsi || '{}')
+    let r = {}; try { r = JSON.parse(l.deskripsi || '{}') } catch {}
     const tgl = new Date(l.created_at).toLocaleDateString('id-ID', { dateStyle: 'short' })
-    html += `<tr><td>${i+1}</td><td style="font-size:12px">${tgl}</td><td>${formatRp(r.modal_awal)}</td><td>${formatRp(r.total_cash)}</td><td>${formatRp(r.total_qris)}</td><td>${formatRp(r.total_kas_keluar)}</td><td style="color:var(--employee)">${formatRp(r.total_konsumsi || 0)}</td><td style="color:var(--accent);font-weight:700">${formatRp(r.estimasi_fisik)}</td></tr>`
+    html += `<tr><td>${i+1}</td><td style="font-size:12px">${tgl}</td><td>${formatRp(r.modal_awal)}</td><td>${formatRp(r.total_cash)}</td><td>${formatRp(r.total_qris)}</td><td style="color:var(--warning)">${formatRp(r.total_kembalian || 0)}</td><td>${formatRp(r.total_kas_keluar)}</td><td style="color:var(--employee)">${formatRp(r.total_konsumsi || 0)}</td><td style="color:var(--accent);font-weight:700">${formatRp(r.estimasi_fisik)}</td></tr>`
   })
   html += '</table>'
   document.getElementById('laporanShiftTabel').innerHTML = html
@@ -414,6 +420,7 @@ async function exportLaporanCSV() {
     Waktu: new Date(o.created_at).toLocaleString('id-ID'),
     Pelanggan: o.nama_pelanggan,
     Metode: o.metode_bayar === 'cash' ? 'Tunai' : 'QRIS',
+    PPN: o.pajak_persen ? Math.round(o.total * o.pajak_persen / (100 + o.pajak_persen)) : 0,
     Total: o.total
   }))
   downloadCSV(rows, 'transaksi-warkop.csv')
@@ -475,9 +482,9 @@ async function renderAdminDashboard() {
     const x = pad.left + (chartW / days.length) * i + (chartW / days.length - barW) / 2
     const barH = d.total > 0 ? (d.total / maxTotal) * chartH : 2
     const y = pad.top + chartH - barH
-    ctx.fillStyle = d.total > 0 ? '#00d4aa' : '#252545'
+    ctx.fillStyle = d.total > 0 ? '#f59e0b' : '#2a2a2e'
     ctx.fillRect(x, y, barW, barH)
-    ctx.fillStyle = '#9090a8'
+    ctx.fillStyle = '#a8a29e'
     ctx.font = '10px Inter, sans-serif'
     ctx.textAlign = 'center'
     ctx.fillText(formatRp(d.total), x + barW / 2, y - 4)

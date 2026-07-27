@@ -65,6 +65,7 @@ function renderCart() {
   if (badge) { badge.textContent = count > 99 ? '99+' : count; badge.style.display = count > 0 ? '' : 'none' }
   const mcb = document.getElementById('mobileCartBtn')
   if (mcb) mcb.classList.toggle('hidden-cart', count === 0)
+  document.getElementById('cartPanel').classList.toggle('cart-empty', cart.length === 0)
 
   if (cart.length === 0) {
     container.innerHTML = '<div class="empty-state">Belum ada item</div>'
@@ -84,6 +85,7 @@ function renderCart() {
         <span class="ci-qty-val">${item.qty}</span>
         <button class="ci-qty-btn ci-qty-plus" data-index="${i}">+</button>
       </div>
+      <button class="ci-edit-cat" data-index="${i}" title="Edit catatan"><i class="bi bi-pencil"></i></button>
       <button class="ci-hapus" data-index="${i}"><i class="bi bi-x"></i></button>
     </div>
   `).join('')
@@ -114,6 +116,13 @@ function renderCart() {
     btn.onclick = () => {
       cart.splice(parseInt(btn.dataset.index), 1); showToast('Item dihapus', 'warning')
       renderCart()
+    }
+  })
+  container.querySelectorAll('.ci-edit-cat').forEach(btn => {
+    btn.onclick = () => {
+      const i = parseInt(btn.dataset.index)
+      const v = prompt('Catatan:', cart[i].catatan || '')
+      if (v !== null) { cart[i].catatan = v; renderCart() }
     }
   })
   saveCart()
@@ -185,4 +194,7 @@ document.getElementById('payBtn').onclick = async () => {
 
 document.getElementById('mobileCartBtn').onclick = () => {
   document.getElementById('cartPanel').classList.toggle('cart-open')
+}
+document.getElementById('cartClose').onclick = () => {
+  document.getElementById('cartPanel').classList.remove('cart-open')
 }

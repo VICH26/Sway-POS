@@ -50,13 +50,15 @@ async function closeShift() {
   const ledger = (await getAll('cash_ledger')).filter(l => l.shift_id === s.shift_id)
   const totalKasKeluar = ledger.filter(l => l.tipe === 'kas_keluar').reduce((a, l) => a + l.nominal, 0)
   const totalKonsumsi = ledger.filter(l => l.tipe === 'konsumsi').reduce((a, l) => a + l.nominal, 0)
+  const totalKembalian = ledger.filter(l => l.tipe === 'kembalian').reduce((a, l) => a + l.nominal, 0)
   const orders = (await getAll('orders')).filter(o => o.status === 'paid' && o.created_at >= s.waktu_buka)
   const totalCash = orders.filter(o => o.metode_bayar === 'cash').reduce((a, o) => a + (o.total||0), 0)
   const totalQris = orders.filter(o => o.metode_bayar === 'qris').reduce((a, o) => a + (o.total||0), 0)
   const rekap = {
     modal_awal: s.modal_awal, total_cash: totalCash, total_qris: totalQris,
     total_kas_keluar: totalKasKeluar, total_konsumsi: totalKonsumsi,
-    estimasi_fisik: s.modal_awal + totalCash - totalKasKeluar
+    total_kembalian: totalKembalian,
+    estimasi_fisik: s.modal_awal + totalCash - totalKembalian - totalKasKeluar
   }
   await put('cash_ledger', {
     id: await getNextId('cash_ledger'), shift_id: s.shift_id, tipe: 'rekap', nominal: 0,
@@ -113,15 +115,17 @@ document.getElementById('tutupWarungBtn').onclick = async () => {
   const ledger = (await getAll('cash_ledger')).filter(l => l.shift_id === s.shift_id)
   const kasKeluar = ledger.filter(l => l.tipe === 'kas_keluar').reduce((a, l) => a + l.nominal, 0)
   const konsumsi = ledger.filter(l => l.tipe === 'konsumsi').reduce((a, l) => a + l.nominal, 0)
+  const totalKembalian = ledger.filter(l => l.tipe === 'kembalian').reduce((a, l) => a + l.nominal, 0)
   const orders = (await getAll('orders')).filter(o => o.status === 'paid' && o.created_at >= s.waktu_buka)
   const cash = orders.filter(o => o.metode_bayar === 'cash').reduce((a, o) => a + (o.total||0), 0)
   const qris = orders.filter(o => o.metode_bayar === 'qris').reduce((a, o) => a + (o.total||0), 0)
-  const estimasi = s.modal_awal + cash - kasKeluar
+  const estimasi = s.modal_awal + cash - totalKembalian - kasKeluar
   document.getElementById('rekapBody').innerHTML = `
     <div class="rekap-row"><span>Modal Awal</span><span>${formatRp(s.modal_awal)}</span></div>
     <div class="rekap-row"><span>Penjualan Tunai</span><span>${formatRp(cash)}</span></div>
     <div class="rekap-row"><span>Penjualan QRIS</span><span>${formatRp(qris)}</span></div>
     <div class="rekap-row"><span>Konsumsi Karyawan</span><span style="color:var(--employee)">${formatRp(konsumsi)}</span></div>
+    <div class="rekap-row"><span>Kembalian</span><span style="color:var(--warning)">${formatRp(totalKembalian)}</span></div>
     <div class="rekap-row"><span>Total Kas Keluar</span><span style="color:var(--danger)">${formatRp(kasKeluar)}</span></div>
     <div class="rekap-row rekap-total"><span>Estimasi Uang Fisik</span><span>${formatRp(estimasi)}</span></div>
   `

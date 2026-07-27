@@ -27,12 +27,13 @@ async function renderMenuGrid(kategori) {
       ? -1
       : m.variants.reduce((s, v) => s + (v.stok || 0), 0)
     const habis = totalStok === 0
+    const menipis = !habis && totalStok > 0 && totalStok <= 5
     const div = document.createElement('div')
     div.className = 'menu-item' + (habis ? ' menu-habis' : '')
     div.innerHTML = `
       <div class="menu-nama">${m.nama}</div>
       <div class="menu-harga">${formatRp(m.harga_dasar)}</div>
-      ${habis ? '<div class="menu-stok-habis">HABIS</div>' : m.variants.length > 0 ? `<div class="menu-varian-count">${m.variants.length} varian</div>` : ''}
+      ${habis ? '<div class="menu-stok-habis">HABIS</div>' : menipis ? '<div class="menu-stok-warning">Sisa ' + totalStok + '</div>' : m.variants.length > 0 ? '<div class="menu-varian-count">' + m.variants.length + ' varian</div>' : ''}
     `
     if (!habis) div.onclick = () => openMenuModal(m)
     grid.appendChild(div)
@@ -91,7 +92,10 @@ function openMenuModal(menu) {
     const container = document.getElementById('addonCheckboxGroup')
     addons.forEach(a => {
       const label = document.createElement('label')
-      label.innerHTML = `<input type="checkbox" value='{"id":${a.id},"nama":"${a.nama_addon}","harga":${a.harga_tambahan}}'> ${a.nama_addon}${a.harga_tambahan > 0 ? ' (+' + formatRp(a.harga_tambahan) + ')' : ''}`
+      const cb = document.createElement('input')
+      cb.type = 'checkbox'
+      cb.value = JSON.stringify({id: a.id, nama: a.nama_addon, harga: a.harga_tambahan})
+      label.append(cb, ' ' + a.nama_addon + (a.harga_tambahan > 0 ? ' (+' + formatRp(a.harga_tambahan) + ')' : ''))
       container.appendChild(label)
     })
   })

@@ -18,14 +18,14 @@
     {"id": 32, "nama": "Chocolatos", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Hangat", "Dingin"], "variants": [{"nama": "Drink Cokelat", "stok": 30}, {"nama": "Drink Matcha", "stok": 30}, {"nama": "Drink Kopi", "stok": 30}]},
     {"id": 33, "nama": "Tea Jus", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Dingin"], "variants": [{"nama": "Gula Batu", "stok": 30}, {"nama": "Apel", "stok": 30}, {"nama": "Lemon", "stok": 30}, {"nama": "Melati", "stok": 30}]},
     {"id": 34, "nama": "Energen", "kategori": "Minuman", "harga_dasar": 5000, "tersedia": ["Hangat", "Dingin"], "variants": [{"nama": "Cokelat", "stok": 30}, {"nama": "Vanilla", "stok": 30}, {"nama": "Kacang Hijau", "stok": 30}, {"nama": "Jahe", "stok": 30}, {"nama": "Kurma", "stok": 30}]},
-    {"id": 35, "nama": "Air Mineral Botolan Teds", "kategori": "Minuman", "harga_dasar": 3000, "tersedia": ["Dingin"], "variants": []}
-  ],
+    {"id": 35, "nama": "Air Mineral Botolan Teds", "kategori": "Minuman", "harga_dasar": 3000, "tersedia": ["Dingin"], "variants": []},
     {"id": 36, "nama": "Indomie Goreng", "kategori": "Makanan", "harga_dasar": 8000, "tersedia": null, "variants": []},
     {"id": 37, "nama": "Indomie Rebus", "kategori": "Makanan", "harga_dasar": 8000, "tersedia": null, "variants": []},
     {"id": 38, "nama": "Nasi Goreng", "kategori": "Makanan", "harga_dasar": 12000, "tersedia": null, "variants": []},
     {"id": 39, "nama": "Roti Bakar", "kategori": "Snack", "harga_dasar": 7000, "tersedia": null, "variants": []},
     {"id": 40, "nama": "Pisang Goreng", "kategori": "Snack", "harga_dasar": 5000, "tersedia": null, "variants": []},
-    {"id": 41, "nama": "Kentang Goreng", "kategori": "Snack", "harga_dasar": 8000, "tersedia": null, "variants": []},
+    {"id": 41, "nama": "Kentang Goreng", "kategori": "Snack", "harga_dasar": 8000, "tersedia": null, "variants": []}
+  ],
   "add_ons": [
     {"id": 1, "nama_addon": "Tambah Telur", "harga_tambahan": 2000},
     {"id": 2, "nama_addon": "Tambah Susu", "harga_tambahan": 2000},

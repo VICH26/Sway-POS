@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#0d0d1a">
+<meta name="theme-color" content="#0f0f12">
 <link rel="manifest" href="manifest.json">
 <title>SWAY POS - Warkop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,24 +25,35 @@
       <button class="tab" data-kategori="Snack">Snack</button>
     </div>
     <div class="header-right">
-      <button class="header-btn" id="modeToggleBtn" title="Ganti mode" aria-label="Ganti mode tampilan"><i class="bi bi-phone" id="modeToggleIcon"></i></button>
       <button class="header-btn" id="bukaWarungBtn"><i class="bi bi-unlock-fill"></i><span> Buka Warung</span></button>
       <button class="header-btn hidden" id="kasKeluarBtn"><i class="bi bi-wallet2"></i><span> Kas Keluar</span></button>
       <button class="header-btn hidden" id="tutupWarungBtn"><i class="bi bi-lock-fill"></i><span> Tutup Warung</span></button>
       <button class="header-btn" id="openBillBtn"><i class="bi bi-clipboard-data"></i><span> Open Bill</span></button>
-      <button class="header-btn" id="adminBtn"><i class="bi bi-shield-lock-fill"></i><span> Admin</span></button>
-      <button class="header-btn" id="fsBtn" aria-label="Fullscreen"><i class="bi bi-arrows-fullscreen"></i></button>
+      <div class="header-dropdown">
+        <button class="header-btn" id="moreBtn"><i class="bi bi-three-dots-vertical"></i></button>
+        <div class="dropdown-menu" id="moreMenu">
+          <button class="dropdown-item" id="themeToggleBtn"><i class="bi bi-moon-fill"></i> Tema Gelap</button>
+          <button class="dropdown-item" id="modeToggleBtn"><i class="bi bi-phone"></i> Ganti Mode</button>
+          <button class="dropdown-item" id="adminBtn"><i class="bi bi-shield-lock-fill"></i> Admin</button>
+        </div>
+      </div>
     </div>
   </header>
 
   <main id="main">
     <div class="menu-panel">
       <input type="text" id="menuSearch" placeholder="Cari menu..." autocomplete="off">
+      <div class="phone-tabs" id="phoneTabs">
+        <button class="tab active" data-kategori="Minuman">Minuman</button>
+        <button class="tab" data-kategori="Makanan">Makanan</button>
+        <button class="tab" data-kategori="Snack">Snack</button>
+      </div>
       <section id="menuGrid"></section>
     </div>
     <aside id="cartPanel">
       <div id="cartHeader">
         <input type="text" id="customerName" placeholder="Nama Pelanggan (opsional)">
+        <button id="cartClose" aria-label="Tutup keranjang"><i class="bi bi-x-lg"></i></button>
       </div>
       <div id="cartItems"></div>
       <div id="cartFooter">
