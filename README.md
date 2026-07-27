@@ -143,7 +143,23 @@ Export CSV, backup data.
 
 ### 📸 Tampilan Aplikasi
 
-> *Tambahkan screenshot di sini*
+<p align="center">
+  <strong>📱 Phone</strong>
+  <br><br>
+  <img src="Media/Screenshots/Phone_Dark-Mode.jpeg" width="30%" alt="Phone Dark Mode">
+  &nbsp;&nbsp;&nbsp;
+  <img src="Media/Screenshots/Phone_Light-Mode.jpeg" width="30%" alt="Phone Light Mode">
+</p>
+
+<br>
+
+<p align="center">
+  <strong>📟 Tablet</strong>
+  <br><br>
+  <img src="Media/Screenshots/Tablet_dark-mode.png" width="45%" alt="Tablet Dark Mode">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="Media/Screenshots/Tablet_Light-Mode.png" width="45%" alt="Tablet Light Mode">
+</p>
 
 <br>
 
@@ -270,7 +286,23 @@ CSV export, data backup.
 
 ### 📸 Screenshots
 
-> *Screenshots coming soon*
+<p align="center">
+  <strong>📱 Phone</strong>
+  <br><br>
+  <img src="Media/Screenshots/Phone_Dark-Mode.jpeg" width="30%" alt="Phone Dark Mode">
+  &nbsp;&nbsp;&nbsp;
+  <img src="Media/Screenshots/Phone_Light-Mode.jpeg" width="30%" alt="Phone Light Mode">
+</p>
+
+<br>
+
+<p align="center">
+  <strong>📟 Tablet</strong>
+  <br><br>
+  <img src="Media/Screenshots/Tablet_dark-mode.png" width="45%" alt="Tablet Dark Mode">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="Media/Screenshots/Tablet_Light-Mode.png" width="45%" alt="Tablet Light Mode">
+</p>
 
 <br>
 
