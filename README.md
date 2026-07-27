@@ -2,13 +2,66 @@
 
 # SWAY POS
 
-**Point-of-Sale for Indonesian Warkop. Offline-first. Dark mode. Android APK.**
+**🇮🇩 POS untuk Warkop Indonesia. Offline. Mode gelap. APK Android.**
 
-SWAY POS is a modern POS system built specifically for coffee shops, food stalls, and small restaurants (*warung kopi* / *rumah makan*). Runs fully offline — no internet, no server, no subscription.
+**🇬🇧 Point-of-Sale for Indonesian Coffee Shops. Offline-first. Dark mode. Android APK.**
 
 ---
 
-## Features
+<details open>
+<summary><b>🇮🇩 Bahasa Indonesia</b></summary>
+
+SWAY POS adalah sistem kasir modern khusus untuk warung kopi, rumah makan, dan usaha kecil. Jalannya offline total — tanpa internet, tanpa server, tanpa langganan.
+
+### Fitur
+
+| Fitur | Deskripsi |
+|-------|-----------|
+| **Manajemen Menu** | Kategori, varian, add-on, stok |
+| **Keranjang Cerdas** | Multi-item, nama pelanggan, total real-time |
+| **Pembayaran Cepat** | Tunai & QRIS, hitung kembalian otomatis |
+| **Sistem Shift** | Buka/Tutup Warung dengan buku kas dan rekap harian |
+| **Open Bill** | Simpan pesanan belum bayar, bayar per-item |
+| **Makan Karyawan** | Catat konsumsi karyawan terpisah |
+| **Buku Kas** | Modal awal, kas keluar, riwayat kembalian |
+| **Panel Admin** | PIN, kelola menu/add-on, laporan |
+| **Dashboard** | Omzet harian, grafik 7 hari, PPN |
+| **Alat Data** | Export CSV, backup & restore |
+| **Premium** | Gratis dengan fitur dasar, premium untuk unlimited |
+
+### Tech
+
+| Layer | |
+|-------|---|
+| UI | HTML + CSS + JS (vanilla, tanpa framework) |
+| Penyimpanan | IndexedDB (offline-first) |
+| APK | WebView wrapper (aplikasi Android mandiri) |
+| Mode | Tablet landscape & HP portrait |
+
+### Lisensi
+
+**Perangkat lunak proprietary.** Hak cipta dilindungi undang-undang.
+
+Repositori ini publik untuk tujuan demonstrasi saja. Kode sumber tidak open source
+dan tidak boleh disalin, dimodifikasi, didistribusikan, atau digunakan tanpa izin
+tertulis.
+
+Untuk lisensi, kustomisasi, atau pemasangan:
+
+<a href="https://wa.me/628179200666?text=Halo%20saya%20tertarik%20dengan%20SWAY%20POS">
+  <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
+</a>
+
+</details>
+
+---
+
+<details>
+<summary><b>🇬🇧 English</b></summary>
+
+SWAY POS is a modern POS system built specifically for coffee shops, food stalls, and small restaurants (*warung kopi* / *rumah makan*). Runs fully offline — no internet, no server, no subscription.
+
+### Features
 
 | Feature | Description |
 |---------|-------------|
@@ -24,7 +77,7 @@ SWAY POS is a modern POS system built specifically for coffee shops, food stalls
 | **Data Tools** | Export CSV, backup & restore, auto cleanup |
 | **Premium** | Free tier available, premium for unlimited menus & analytics |
 
-## Tech
+### Tech
 
 | Layer | |
 |-------|---|
@@ -33,11 +86,7 @@ SWAY POS is a modern POS system built specifically for coffee shops, food stalls
 | APK | WebView wrapper (standalone Android app) |
 | Mode | Tablet landscape & phone portrait |
 
-## Screenshots
-
-<!-- Add screenshots here -->
-
-## Licensing
+### Licensing
 
 **Proprietary software.** All rights reserved.
 
@@ -50,3 +99,5 @@ For licensing, customization, or deployment inquiries:
 <a href="https://wa.me/628179200666?text=Halo%20saya%20tertarik%20dengan%20SWAY%20POS">
   <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
 </a>
+
+</details>
