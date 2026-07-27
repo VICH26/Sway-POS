@@ -53,6 +53,7 @@ function setMode(mode) {
 let appStarted = false
 
 document.addEventListener('DOMContentLoaded', async () => {
+  try {
   initTheme()
   document.getElementById('modalOverlay').onclick = () => {
     document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden'))
@@ -63,8 +64,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (savedMode) {
     setMode(savedMode)
     if (!appStarted) { appStarted = true; initApp() }
+    document.getElementById('modeSelector').classList.add('hidden')
   }
-  document.getElementById('modeSelector').classList.remove('hidden')
 
   document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.onclick = () => {
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       menu.classList.remove('open')
     }
   })
+  } catch(e) { console.error(e) }
 })
 
 document.addEventListener('keydown', e => {

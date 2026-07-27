@@ -71,7 +71,7 @@
   </main>
 </div>
 
-<div id="modeSelector" class="mode-selector hidden">
+<div id="modeSelector" class="mode-selector">
   <div class="mode-selector-content">
     <h2>Pilih Mode Tampilan</h2>
     <p class="mode-desc">Sesuaikan tata letak dengan perangkat Anda</p>
@@ -234,6 +234,13 @@
   </div>
 </div>
 
+<script>
+try {
+  if (localStorage.getItem('sway_mode')) {
+    document.getElementById('modeSelector').classList.add('hidden')
+  }
+} catch(e) {}
+</script>
 <script src="js/db.js"></script>
 <script src="js/menus.js"></script>
 <script src="js/cart.js"></script>
