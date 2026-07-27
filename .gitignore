@@ -1,29 +1,41 @@
-# Build
-dist/
-*.apk
-*.keystore
-*.aab
+# App source (not public — distributed via APK release only)
+index.html
+app.js
+sw.js
+manifest.json
+js/
+css/
+data/
+icons/src/
 
-# Dependencies
-node_modules/
-
-# Internal dev tools
+# Internal dev
 .agents/
 .opencode/
 .superpowers/
 AGENTS.md
-
-# Design system artifacts
+docs/
+test/
 design-system/
 
-# Internal docs
-docs/plans/
-
-# Sensitive / build internals
+# Sensitive
 generate-premium.js
 nitron-main.js
+nitron.config.js
 
-# Graphify output
+# Build config
+package.json
+package-lock.json
+
+# Build output
+dist/
+*.apk
+*.aab
+*.keystore
+
+# Dependencies
+node_modules/
+
+# Graphify
 graphify-out/
 
 # OS
