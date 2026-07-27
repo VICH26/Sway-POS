@@ -59,7 +59,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('modalOverlay').classList.add('hidden')
   }
 
-  document.getElementById('modeSelector').classList.remove('hidden')
+  const savedMode = localStorage.getItem('sway_mode')
+  if (savedMode) {
+    setMode(savedMode)
+    if (!appStarted) { appStarted = true; initApp() }
+  } else {
+    document.getElementById('modeSelector').classList.remove('hidden')
+  }
 
   document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.onclick = () => {
