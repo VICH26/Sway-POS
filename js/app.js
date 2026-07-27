@@ -176,7 +176,8 @@ async function showOpenBills() {
           return { menu, varian: i.varian_dipilih, suhu: i.suhu, addons: addonSnapshot, catatan: i.catatan, subtotal: i.subtotal, detail: '', qty, harga_satuan: Math.round(i.subtotal / qty) }
 })
         renderCart()
-        showPayment()
+        showToast('Item open bill dimuat — hapus yg bukan pesanan, lalu Bayar Sekarang', 'info')
+        document.getElementById('cartPanel').classList.add('cart-open')
       }
     })
   }
