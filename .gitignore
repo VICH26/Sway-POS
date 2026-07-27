@@ -1,6 +1,31 @@
+# Build
 dist/
 *.apk
-node_modules/
-graphify-out/
 *.keystore
+*.aab
+
+# Dependencies
+node_modules/
+
+# Internal dev tools
+.agents/
 .opencode/
+.superpowers/
+AGENTS.md
+
+# Design system artifacts
+design-system/
+
+# Internal docs
+docs/plans/
+
+# Sensitive / build internals
+generate-premium.js
+nitron-main.js
+
+# Graphify output
+graphify-out/
+
+# OS
+.DS_Store
+Thumbs.db
