@@ -63,9 +63,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (savedMode) {
     setMode(savedMode)
     if (!appStarted) { appStarted = true; initApp() }
-  } else {
-    document.getElementById('modeSelector').classList.remove('hidden')
   }
+  document.getElementById('modeSelector').classList.remove('hidden')
 
   document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.onclick = () => {
@@ -154,7 +153,7 @@ async function showOpenBills() {
         <label class="ob-item-row${i.paid ? ' ob-item-paid' : ''}">
           <input type="checkbox" class="ob-item-cb" data-id="${i.id}" data-order="${o.id}"${i.paid ? ' checked disabled' : ''}>
           <span class="ob-item-name">${i.nama_menu}${i.varian_dipilih ? ' - ' + i.varian_dipilih : ''} x${i.qty}</span>
-          <span class="ob-item-price">${formatRp(i.subtotal)}</span>
+          <span class="ob-item-price" data-price="${i.subtotal}">${formatRp(i.subtotal)}</span>
         </label>
       `).join('')
       return `<div class="ob-item" data-id="${o.id}">
@@ -179,7 +178,7 @@ async function showOpenBills() {
         const sel = container.querySelectorAll(`.ob-item-cb[data-order="${orderId}"]:checked:not(:disabled)`)
         const total = Array.from(sel).reduce((s, c) => {
           const priceEl = c.closest('.ob-item-row').querySelector('.ob-item-price')
-          return s + parsePrice(priceEl.textContent)
+          return s + parseInt(priceEl.dataset.price || 0)
         }, 0)
         document.getElementById('selectedTotal-' + orderId).textContent = formatRp(total)
       }
