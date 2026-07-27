@@ -231,13 +231,28 @@ html, body { height: 100%; overflow: hidden; font-family: var(--font); backgroun
 .btn-add-custom:hover { filter: brightness(1.12); transform: translateY(-1px); }
 .btn-add-custom:active { transform: scale(0.97); }
 
-#openBillList .ob-item { padding: 18px 22px; background: var(--bg-surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
+#openBillList .ob-item { background: var(--bg-surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 12px; overflow: hidden; transition: var(--transition); }
 #openBillList .ob-item:hover { border-color: var(--border-hover); }
+.ob-item .ob-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px 10px; }
 .ob-item .ob-nama { font-weight: 600; font-size: 18px; }
 .ob-item .ob-total { font-size: 20px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
 .ob-item .ob-waktu { font-size: 14px; color: var(--text-secondary); margin-top: 2px; }
-.ob-item button { padding: 14px 24px; background: var(--accent); color: var(--bg-deep); border: none; border-radius: var(--radius-xs); cursor: pointer; font-weight: 600; font-size: 17px; min-height: 52px; transition: var(--transition); font-family: var(--font); }
-.ob-item button:hover { filter: brightness(1.1); }
+.ob-items { padding: 0 22px; }
+.ob-item-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--border); cursor: pointer; transition: var(--transition); }
+.ob-item-row:hover { background: var(--bg-elevated); margin: 0 -22px; padding: 6px 22px; }
+.ob-item-row.ob-item-paid { opacity: 0.5; cursor: default; }
+.ob-item-row.ob-item-paid:hover { background: transparent; }
+.ob-item-cb { width: 18px; height: 18px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+.ob-item-paid .ob-item-cb { cursor: default; }
+.ob-item-name { flex: 1; font-size: 14px; color: var(--text); }
+.ob-item-paid .ob-item-name { text-decoration: line-through; color: var(--text-muted); }
+.ob-item-price { font-size: 14px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ob-item-paid .ob-item-price { color: var(--text-muted); }
+.ob-item .ob-footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 22px 14px; gap: 12px; }
+.ob-selected-total { font-size: 16px; font-weight: 700; color: var(--warning); }
+.ob-item .ob-bayar-btn { padding: 10px 20px; background: var(--accent); color: var(--bg-deep); border: none; border-radius: var(--radius-xs); cursor: pointer; font-weight: 600; font-size: 14px; min-height: 40px; transition: var(--transition); font-family: var(--font); white-space: nowrap; }
+.ob-item .ob-bayar-btn:hover { filter: brightness(1.1); }
+.ob-item .ob-bayar-btn:disabled { opacity: 0.4; cursor: default; }
 
 .empty-state { text-align: center; padding: 60px 24px; color: var(--text-muted); font-size: 18px; }
 
@@ -428,6 +443,18 @@ body.mode-phone .admin-menu-card .amc-varian { font-size: 10px; padding: 0 6px; 
 body.mode-phone .admin-form-grid input,
 body.mode-phone .admin-form-grid select { padding: 4px 6px; font-size: 12px; }
 body.mode-phone .admin-form-grid .form-row { gap: 4px; }
+body.mode-phone .ob-item .ob-header { padding: 12px 14px 6px; }
+body.mode-phone .ob-item .ob-nama { font-size: 14px; }
+body.mode-phone .ob-item .ob-total { font-size: 15px; }
+body.mode-phone .ob-item .ob-waktu { font-size: 11px; }
+body.mode-phone .ob-items { padding: 0 14px; }
+body.mode-phone .ob-item-row { padding: 4px 0; gap: 6px; }
+body.mode-phone .ob-item-row:hover { margin: 0 -14px; padding: 4px 14px; }
+body.mode-phone .ob-item-name { font-size: 12px; }
+body.mode-phone .ob-item-price { font-size: 12px; }
+body.mode-phone .ob-item .ob-footer { padding: 6px 14px 10px; gap: 8px; }
+body.mode-phone .ob-selected-total { font-size: 13px; }
+body.mode-phone .ob-item .ob-bayar-btn { padding: 8px 14px; font-size: 12px; min-height: 34px; }
 
 body.mode-tablet #phoneTabs { display: none; }
 body.mode-tablet .header-center { display: flex; }

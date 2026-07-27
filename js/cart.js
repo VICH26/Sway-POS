@@ -178,7 +178,8 @@ document.getElementById('saveBillBtn').onclick = async () => {
       addon_snapshot: JSON.stringify(item.addons),
       catatan: item.catatan,
       subtotal: item.subtotal,
-      qty: item.qty || 1
+      qty: item.qty || 1,
+      paid: 0
     })
   }
 
