@@ -109,6 +109,10 @@ Modal awal, kas keluar, riwayat kembalian.
 PIN proteksi. Kelola menu, add-on, laporan.  
 *Aman & terpercaya.*
 
+**⭐ Premium**  
+Trial 7 hari gratis. Aktivasi kode berlangganan.  
+*Tanpa server, tanpa account.*
+
 </td>
 </tr>
 <tr>
@@ -251,6 +255,10 @@ Initial cash, expenses, change history.
 **🔒 Admin Panel**  
 PIN-protected. Manage menu, add-ons, reports.  
 *Secure & reliable.*
+
+**⭐ Premium**  
+Free 7-day trial. Subscription activation codes.  
+*No server, no account needed.*
 
 </td>
 </tr>
