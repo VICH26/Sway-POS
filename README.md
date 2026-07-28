@@ -46,7 +46,7 @@
 
 <br>
 
-SWAY POS adalah sistem kasir modern untuk **warung kopi, rumah makan, dan usaha kecil** di Indonesia. **100% offline** — tanpa internet, tanpa server, tanpa langganan bulanan.
+SWAY POS adalah sistem kasir modern untuk **warung kopi, rumah makan, dan usaha kecil** di Indonesia. **100% offline** — tanpa internet, tanpa server. Free untuk kebutuhan dasar, upgrade premium untuk akses penuh.
 
 <br>
 
@@ -112,7 +112,7 @@ SWAY POS adalah sistem kasir modern untuk **warung kopi, rumah makan, dan usaha 
 
 <br>
 
-SWAY POS is a modern POS system for **Indonesian coffee shops, food stalls, and small restaurants**. **100% offline** — no internet, no server, no monthly subscription.
+SWAY POS is a modern POS system for **Indonesian coffee shops, food stalls, and small restaurants**. **100% offline** — no internet, no server. Free for basic needs, upgrade to premium for full access.
 
 <br>
 
